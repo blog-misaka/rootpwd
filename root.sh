@@ -34,12 +34,12 @@ WgcfIPv4Status=$(curl -s4m8 https://www.cloudflare.com/cdn-cgi/trace -k | grep w
 WgcfIPv6Status=$(curl -s6m8 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2)
 if [[ $WgcfIPv4Status =~ "on"|"plus" ]] || [[ $WgcfIPv6Status =~ "on"|"plus" ]]; then
     wg-quick down wgcf >/dev/null 2>&1
-    v6=$(curl -s6m8 ip.p3terx.com -k | sed -n 1p)
-    v4=$(curl -s4m8 ip.p3terx.com -k | sed -n 1p)
+    v6=$(curl -s6m8 api64.ipify.org -k)
+    v4=$(curl -s4m8 api64.ipify.org -k)
     wg-quick up wgcf >/dev/null 2>&1
 else
-    v6=$(curl -s6m8 ip.p3terx.com -k | sed -n 1p)
-    v4=$(curl -s4m8 ip.p3terx.com -k | sed -n 1p)
+    v6=$(curl -s6m8 api64.ipify.org -k)
+    v4=$(curl -s4m8 api64.ipify.org -k)
 fi
 
 sudo lsattr /etc/passwd /etc/shadow >/dev/null 2>&1
